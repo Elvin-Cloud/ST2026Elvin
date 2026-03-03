@@ -1,0 +1,94 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOSyZYrf5CwZ6VvTLMQIa+F",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Elvin-Cloud/ST2026Elvin/blob/main/Carey_Prompt%20Chaining_for_Customer_Support_A_pynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import json\n",
+        "# Exercise 1\n",
+        "# 1. Classification Step we take\n",
+        "def classify_intent(user_message):\n",
+        "    # In a real app, this would be an API call to an LLM\n",
+        "    # For this assignment, we simulate the 'Refund' intent based on the message\n",
+        "    if \"money back\" in user_message.lower() or \"refund\" in user_message.lower():\n",
+        "        return \"refund\"\n",
+        "    return \"tech\"\n",
+        "\n",
+        "# 2. Response Step (The Chain)\n",
+        "def generate_response(intent, user_message):\n",
+        "    # This simulates what the LLM would return based on the Intent from Step 1\n",
+        "    response_data = {\n",
+        "        \"intent\": intent,\n",
+        "        \"customer_message\": user_message,\n",
+        "        \"reply\": \"I'm so sorry to hear your gadget arrived broken. I have initiated a refund request, and you will receive a confirmation email shortly.\"\n",
+        "    }\n",
+        "\n",
+        "    # We turn the dictionary into aa JSON string..\n",
+        "    response_json = json.dumps(response_data)\n",
+        "    return response_json\n",
+        "\n",
+        "# Final piece\n",
+        "user_input = \"My gadget arrived broken and I want my money back.\"\n",
+        "intent = classify_intent(user_input)\n",
+        "final_output = generate_response(intent, user_input)\n",
+        "\n",
+        "print(f\"Detected Intent: {intent}\")\n",
+        "print(\"Final JSON Output:\")\n",
+        "print(final_output)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "kiMQLEUSoT8o",
+        "outputId": "124538ee-7eca-4d9c-cd13-e8fc3eddb7e5"
+      },
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Detected Intent: refund\n",
+            "Final JSON Output:\n",
+            "{\"intent\": \"refund\", \"customer_message\": \"My gadget arrived broken and I want my money back.\", \"reply\": \"I'm so sorry to hear your gadget arrived broken. I have initiated a refund request, and you will receive a confirmation email shortly.\"}\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "lW5e9086o1As"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
